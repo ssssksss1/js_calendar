@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="commonStyle.css">
+	<meta charset="UTF-8">
+	<title> 수업목록 </title>
+	<script type="text/javascript">
+document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+
+
+	let classList = [
+		{
+		"학기" : "1학년 1학기",
+			"수업목록" : [
+				{
+					"수업": "미분적분학(1)", "내용" : "수학"	
+				},	{
+					"수업": "한국사의재조명", "내용" : "한국사"	
+				},	{
+					"수업": "실용영어회화(1)", "내용" : "영어"	
+				},	{
+					"수업": "일반화학및실험", "내용" : "화학"	
+				},	{
+					"수업": "물리학및실험(1)", "내용" : "물리"	
+				},	{
+					"수업": "현대기술과사회", "내용" : "사회"	
+				},	{
+					"수업": "진로설계", "내용" : "진로"	
+				},{
+					"수업": "논리와사고", "내용" : "논리"	
+				},{
+					"수업": "융합공학개론", "내용" : "공학기초"	
+				},
+			]
+		},		{
+		"학기" : "1학년 2학기",
+			"수업목록" : [
+				{
+					"수업": "미분적분학(2)", "내용" : "수학"	
+				},	
+				{
+					"수업": "글쓰기와의사소통", "내용" : "글쓰기"	
+				},
+				{
+					"수업": "실용영어회화(2)", "내용" : "영어"	
+				},
+				{
+					"수업": "물리학및실험(2)", "내용" : "물리"	
+				},
+				{
+					"수업": "삶의윤리학", "내용" : "윤리"	
+				},
+				{
+					"수업": "정역학", "내용" : "정지된 물체에 대한 역학"	
+				},
+
+			]
+		},		{
+		"학기" : "2학년 1학기",
+			"수업목록" : [
+				{
+					"수업": "정치의 이해", "내용" : "정치"	
+				},	
+				{
+					"수업": "재료역학", "내용" : "재료에 가해지는 힘 계산 방법"	
+				},
+				{
+					"수업": "공학수학(1)", "내용" : "수학"	
+				},
+				{
+					"수업": "기계제도", "내용" : "기계 2D 제도 방법"	
+				},
+				{
+					"수업": "열역학", "내용" : "열역학"	
+				},
+				{
+					"수업": "전기전자개론", "내용" : "전기 회로 관련"	
+				},
+				{
+					"수업": "창의입문설계", "내용" : "창의적 제작"	
+				},
+
+			]
+		},		{
+		"학기" : "2학년 2학기",
+			"수업목록" : [
+				{
+					"수업": "현대사회와철학", "내용" : "철학"	
+				},	
+				{
+					"수업": "프로그래밍입문", "내용" : "C언어"	
+				},
+				{
+					"수업": "유체역학", "내용" : "액체나 기체에 대학 역학"	
+				},
+				{
+					"수업": "공학프로그래밍", "내용" : "MATLAB"	
+				},
+				{
+					"수업": "아나로그반도체공학", "내용" : "전기 회로 관련"	
+				},
+			]
+		},		{
+		"학기" : "3학년 1학기",
+			"수업목록" : [
+				{
+					"수업": "중국어(1)", "내용" : "중국어 기초"	
+				},	
+				{
+					"수업": "기계공작법", "내용" : "공작기계에 대한 설명"	
+				},
+				{
+					"수업": "PC기반제어프로그래밍", "내용" : "C#"	
+				},
+				{
+					"수업": "마이크로컨트롤러", "내용" : "MCU를 이용한 제작"	
+				},
+			]
+		},		{
+		"학기" : "3학년 2학기",
+			"수업목록" : [
+				{
+					"수업": "공학수학(2)", "내용" : "수학"	
+				},	
+				{
+					"수업": "수치해석", "내용" : "선형대수 등 수치계산"	
+				},
+				{
+					"수업": "동역학", "내용" : "움직이는 물체 역학계산"	
+				},
+				{
+					"수업": "CAD", "내용" : "SolidWorks 3D 설계 툴"	
+				},
+				{
+					"수업": "자동화시스템", "내용" : "MCU를 이용한 프로그래밍"	
+				},
+				{
+					"수업": "디지털이미지프로세싱", "내용" : "영상처리"	
+				},
+				{
+					"수업": "기술경제세미나", "내용" : "경제"	
+				},
+			]
+		},		
+		{
+		"학기" : "4학년 1학기",
+			"수업목록" : [
+				{
+					"수업": "과학기술과지식재산권", "내용" : "지식재산권, 특허권 등"	
+				},	
+				{
+					"수업": "연극의 이해", "내용" : "연극 관련 수업"	
+				},
+				{
+					"수업": "인공지능과 기초와 활용", "내용" : "인공지능 기초"	
+				},
+				{
+					"수업": "문명과 철학", "내용" : "철학 수업"	
+				},
+				{
+					"수업": "실험계획법", "내용" : "실험을 최소, 최적으로 설계하는 방법"	
+				},
+				{
+					"수업": "임베디드시스템프로그래밍", "내용" : "임베디드 프로그래밍"	
+				},
+			]
+		},		{
+		"학기" : "4학년 2학기",
+			"수업목록" : [
+				
+			]
+		},
+	]
+
+	window.onload = function() {
+		const mainTemp = document.querySelector("#class-list");
+		classList.map((i)=>{
+			const temp = document.createElement("div"); // 각 묶음
+			temp.setAttribute("id",i.학기);
+			const temp1 = document.createElement("span");
+			temp1.innerText = i.학기;
+			temp.append(temp1);
+			i.수업목록.map((j)=>{
+				const temp2 = document.createElement("div");
+				const temp3 = document.createElement("span");
+				const temp4 = document.createElement("span");
+				const temp5 = document.createElement("button");
+				temp3.innerText = "수업 : " + j.수업;
+				temp4.innerText = "내용 : " + j.내용;
+				temp5.innerText = "X";
+				temp5.addEventListener("click",(event)=>{
+					event.currentTarget.parentNode.remove();
+				});
+				temp2.append(temp3);
+				temp2.append(temp4);
+				temp2.append(temp5);
+				temp.append(temp2);
+			})
+			mainTemp.append(temp);
+		})
+
+		document.querySelector("#add-class-btn").addEventListener("click",()=>{
+			const temp2 = document.createElement("div");
+			const temp3 = document.createElement("span");
+			const temp4 = document.createElement("span");
+			const temp5 = document.createElement("button");
+			temp3.innerText = document.getElementById("add-class-name-input").value;
+			temp4.innerText = document.getElementById("add-class-content-input").value;
+			document.getElementById("add-class-name-input").value="";
+			document.getElementById("add-class-content-input").value="";
+			temp5.innerText = "X";
+			temp5.addEventListener("click",(event)=>{
+					event.currentTarget.parentNode.remove();
+			});
+			temp2.append(temp3);
+			temp2.append(temp4);
+			temp2.append(temp5);
+			document.getElementById(document.querySelector("select").value).append(temp2);
+		})
+	}
+
+	</script>
+	<style type="text/css">
+		button:hover {
+			cursor: pointer;
+			box-shadow: 1px 1px 0px 0px black;
+			transform: translate(-1px,-1px);
+		}
+		#add-class {
+			display: flex;
+			flex-flow: nowrap column;
+			gap: 10px;
+			padding-bottom: 20px;
+			padding: 20px 60px;
+			box-shadow: 1px 1px rgba(1,1,1,0.2);
+			background-color: rgba(129,129,245,0.1);
+		}
+		#add-class > input,select {
+			border: none;
+			outline: none;
+			padding: 4px;
+		}
+		#add-class button {
+			padding: 4px;
+			background-color: rgba(62,122,255,0.2);
+			border-radius: 10px;
+		}		
+		#class-list {
+			display: flex;
+			flex-flow: nowrap column;
+			gap: 10px;
+			align-items: center;
+			padding: 20px 0px;
+		}
+		#class-list > div {
+			display: flex;
+			flex-flow: nowrap column;
+			padding: 4px;
+			margin: 2px;
+			box-shadow: 0px 3px 3px rgba(0,0,0,0.2);
+			min-width: 640px;
+		}
+		#class-list > div > span:nth-of-type(1) {
+			background: rgba(245,245,166,0.5);
+			margin-bottom: 4px;
+		}		
+		#class-list > div > span:nth-of-type(n+1) {
+			padding: 1px 0px 1px 4px;
+		}
+		#class-list > div > div {
+			display: grid;
+			grid-template-columns: 1fr 1fr 20px;
+			padding: 2px 2px;
+		}
+		#class-list > div > div:nth-of-type(2n+1) {
+			background-color: rgba(100,100,100,0.1);
+		}
+		#class-list > div > div > button {
+			background-color: rgba(150,150,150,0.5);
+		}
+
+
+	</style>
+</head>
+<body>
+	<nav>
+		<button type="button" onclick="location.href='home.html' ">홈</button>
+		<button type="button" onclick="location.href='class-list.html' ">수강목록</button>
+		<button type="button" onclick="location.href='interest-field.html' ">관심분야</button>
+		<button type="button" onclick="location.href='make-webproject.html' ">웹페이지 주제 목록</button>
+	</nav>
+	<section id="add-class">
+		<div> 수업을 추가하는 공간 <button id="add-class-btn"> 추가하기 </button>  </div>
+		<select>
+			<option> 1학년 1학기 </option>
+			<option> 1학년 2학기 </option>
+			<option> 2학년 1학기 </option>
+			<option> 2학년 2학기 </option>
+			<option> 3학년 1학기 </option>
+			<option> 3학년 2학기 </option>
+			<option> 4학년 1학기 </option>
+			<option> 4학년 2학기 </option>
+		</select>
+		<input id="add-class-name-input" placeholder="수업 이름을 입력하세요" />
+		<input id="add-class-content-input" placeholder="수업 내용을 입력하세요" />
+	</section>
+	<section id="class-list">
+	</section>
+</body>
+</html>
+
+

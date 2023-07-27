@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<link rel="stylesheet" type="text/css" href="commonStyle.css">
+	<meta charset="UTF-8">
+	<title> 관심사 </title>
+	<script type="text/javascript">
+document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+
+
+	let classList = [
+		{
+			"분야" : "스포츠",
+			"종류" : [
+				"테니스"
+			]
+		},
+	]
+
+	window.onload = function() {
+		const mainTemp = document.querySelector("#add-list");
+		classList.map((i)=>{
+			const temp = document.createElement("div"); // 각 묶음
+			temp.setAttribute("id",i.분야);
+			const temp1 = document.createElement("span");
+			temp1.innerText = i.분야;
+			temp.append(temp1);
+			const temp2 = document.createElement("span");
+			i.종류.map((j)=>{
+				temp2.innerText += j + " ";
+			})
+			temp.append(temp2);
+			const temp3 = document.createElement("button");
+			temp3.innerText = "X";
+			temp3.addEventListener("click",(event)=>{
+				event.currentTarget.parentNode.remove();
+			});
+			temp.append(temp3);
+			mainTemp.append(temp);
+		})
+
+		document.querySelector("#add-interest-btn").addEventListener("click",()=>{
+			const temp2 = document.createElement("div");
+			const temp3 = document.createElement("span");
+			const temp4 = document.createElement("span");
+			const temp5 = document.createElement("button");
+			temp3.innerText = document.getElementById("add-interest-name-input").value;
+			temp4.innerText = document.getElementById("add-interest-field-input").value;
+			document.getElementById("add-interest-field-input").value="";
+			document.getElementById("add-interest-name-input").value="";
+			temp5.innerText = "X";
+			temp5.addEventListener("click",(event)=>{
+					event.currentTarget.parentNode.remove();
+			});
+			temp2.append(temp3);
+			temp2.append(temp4);
+			temp2.append(temp5);
+			mainTemp.append(temp2);
+		})
+	}
+
+	</script>
+	<style type="text/css">
+		button:hover {
+			cursor: pointer;
+			box-shadow: 1px 1px 0px 0px black;
+			transform: translate(-1px,-1px);
+		}
+		#add-interest {
+			display: flex;
+			flex-flow: nowrap column;
+			gap: 10px;
+			padding-bottom: 20px;
+			padding: 20px 60px;
+			box-shadow: 1px 1px rgba(1,1,1,0.2);
+			background-color: rgba(129,129,245,0.1);
+		}
+		#add-interest > input,select {
+			border: none;
+			outline: none;
+			padding: 4px;
+		}
+		#add-interest button {
+			padding: 4px;
+			background-color: rgba(62,122,255,0.2);
+			border-radius: 10px;
+		}		
+		#add-list {
+			display: flex;
+			flex-flow: nowrap column;
+			gap: 10px;
+			align-items: center;
+			padding: 20px 0px;
+		}
+		#add-list > div {
+			padding: 4px;
+			min-width: 640px;
+			display: grid;
+			grid-template-columns: 1fr 1fr 20px;
+			padding: 2px 2px;
+		}
+		#add-list > div:nth-of-type(1) {
+			background: rgba(245,245,166,0.5);
+			margin-bottom: 4px;
+		}
+		#add-list > div:nth-of-type(2n+3) {
+			background-color: rgba(100,100,100,0.1);
+		}
+		#add-list > div >  button {
+			background-color: rgba(150,150,150,0.5);
+		}
+
+	</style>
+</head>
+<body>
+	<nav>
+		<button type="button" onclick="location.href='home.html' ">홈</button>
+		<button type="button" onclick="location.href='class-list.html' ">수강목록</button>
+		<button type="button" onclick="location.href='interest-field.html' ">관심분야</button>
+		<button type="button" onclick="location.href='make-webproject.html' ">웹페이지 주제 목록</button>
+	</nav>
+	<section id="add-interest">
+		<div> 관심 분야 추가하는 공간 <button id="add-interest-btn"> 추가하기 </button>  </div>
+		<input id="add-interest-name-input" placeholder="관심분야를 입력하세요" />		
+		<input id="add-interest-field-input" placeholder="분야이름을 입력하세요" />
+	</section>
+	<section id="add-list">
+		<div>  
+			<span> 분야 </span>
+			<span> 종류 </span>
+		</div>		
+	</section>
+</body>
+</html>
+
+

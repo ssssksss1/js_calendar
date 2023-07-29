@@ -1,0 +1,63 @@
+section {
+  margin: auto;
+  max-width: 1400px;
+  background-color: #f0f0f0;
+}
+
+#calendarHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  gap: 4px;
+}
+#calendarHeader #dateYearAndMonth {
+  width: 120px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffdca0;
+  gap: 4px;
+}
+#calendarHeader button {
+  width: 40px;
+  height: 40px;
+  background-color: #ffdca0;
+}
+
+#dayOfTheWeekContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0px 4px;
+}
+#dayOfTheWeekContainer div {
+  text-align: center;
+  padding: 4px 8px;
+  background-color: #ffdcaf;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+#dayOfTheWeekContainer div:nth-of-type(1) {
+  color: red;
+}
+#dayOfTheWeekContainer div:nth-of-type(7) {
+  color: blue;
+}
+
+#dayContainer {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px 4px;
+}
+#dayContainer button {
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  padding: 4px 8px;
+  background-color: #ffdcaf;
+  font-weight: 600;
+  aspect-ratio: 1;
+}
+
+/*# sourceMappingURL=app.css.map */

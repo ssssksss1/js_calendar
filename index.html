@@ -1,33 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<link rel="stylesheet" type="text/css" href="commonStyle.css">
-	<meta charset="UTF-8">
-	<title>홈</title>
-	<script type="text/javascript">
-document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-
-	window.onload = function() {
-	}
-
-
-	</script>
-	<style type="text/css">
-		/**
-			* 각 페이지 스타일 작성 
-		*/
-
-	</style>
-</head>
-<body>
-	<nav>
-		<button type="button" onclick="location.href='index.html' ">홈</button>
-		<button type="button" onclick="location.href='class-list.html' ">수강목록</button>
-		<button type="button" onclick="location.href='interest-field.html' ">관심분야</button>
-		<button type="button" onclick="location.href='make-webproject.html' ">웹페이지 주제 목록</button>
-	</nav>
-	<section>
-		홈
-	</section>
-</body>
+  <head>
+    <link rel="stylesheet" type="text/css" href="commonStyle.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="" width="device-width," initial-scale="1.0" />
+    <title>홈</title>
+    <script src="./js/app.js"></script>
+    <link rel="stylesheet" href="./css/app.css" />
+  </head>
+  <body>
+    <nav>
+      <button type="button" onclick="location.href='index.html' ">홈</button>
+    </nav>
+    <section>
+      <header id="calendarHeader">
+        <button>◀️</button>
+        <div id="dateYearAndMonth">
+          <span id="year"> </span>
+          <span id="month"> </span>
+        </div>
+        <button>▶️</button>
+      </header>
+      <article>
+        <div id="dayOfTheWeekContainer">
+          <div>일</div>
+          <div>월</div>
+          <div>화</div>
+          <div>수</div>
+          <div>목</div>
+          <div>금</div>
+          <div>토</div>
+        </div>
+        <div id="dayContainer"></div>
+      </article>
+    </section>
+  </body>
 </html>

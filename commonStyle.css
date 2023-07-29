@@ -1,17 +1,8 @@
 * {
-	margin: 0px;
-	padding: 0px;
-	border: 0px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
 }
-body > nav {
-	padding: 10px 10px;
-	height: 40px;
-}
-body > nav > button {
-	padding: 4px;
-	background-color: rgba(200,200,200);
-	color: white;
-}
-body > nav > button:hover {
-	color: blue;
+button:hover {
+  cursor: pointer;
 }

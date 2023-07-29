@@ -1,6 +1,6 @@
 section {
   margin: auto;
-  max-width: 1400px;
+  max-width: 1200px;
   background-color: #f0f0f0;
 }
 
@@ -9,7 +9,6 @@ section {
   justify-content: center;
   align-items: center;
   height: 60px;
-  gap: 4px;
 }
 #calendarHeader #dateYearAndMonth {
   width: 120px;
@@ -19,8 +18,10 @@ section {
   align-items: center;
   background-color: #ffdca0;
   gap: 4px;
+  font-weight: 800;
 }
 #calendarHeader button {
+  outline: 1px solid #666666;
   width: 40px;
   height: 40px;
   background-color: #ffdca0;
@@ -29,14 +30,13 @@ section {
 #dayOfTheWeekContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 0px 4px;
 }
 #dayOfTheWeekContainer div {
   text-align: center;
   padding: 4px 8px;
   background-color: #ffdcaf;
   font-weight: 600;
-  margin-bottom: 2px;
+  outline: 1px solid #666666;
 }
 #dayOfTheWeekContainer div:nth-of-type(1) {
   color: red;
@@ -48,7 +48,6 @@ section {
 #dayContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  gap: 2px 4px;
 }
 #dayContainer button {
   display: flex;
@@ -58,6 +57,13 @@ section {
   background-color: #ffdcaf;
   font-weight: 600;
   aspect-ratio: 1;
+  outline: 1px solid #666666;
+}
+#dayContainer button:nth-of-type(7n + 1) {
+  color: red;
+}
+#dayContainer button:nth-of-type(7n + 7) {
+  color: blue;
 }
 
 /*# sourceMappingURL=app.css.map */

@@ -3,6 +3,21 @@
   padding: 0px;
   border: 0px;
 }
+html {
+  font-size: 62.5%;
+}
 button:hover {
   cursor: pointer;
+}
+.flexRow {
+  display: flex;
+  flex-flow: row;
+  gap: 8px;
+}
+
+select {
+  outline: solid 1px black;
+  background: transparent;
+  border-radius: 10px;
+  padding: 4px;
 }

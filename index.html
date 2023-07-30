@@ -31,8 +31,70 @@
           <div>금</div>
           <div>토</div>
         </div>
-        <div id="dayContainer"></div>
+        <div id="monthContainer"></div>
       </article>
     </section>
+    <div id="modalOverlay" class="modal"></div>
+    <div id="modal" class="modal">
+      <div id="modalHeaderContainer">
+        <div id="modalHeaderTitle">타이틀</div>
+        <div class="modalCloseBtn">
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+      <div id="modalBodyContainer">
+        <div class="inputItem">
+          <span> 일정 제목 </span>
+          <input type="text" placeholder="제목을입력하시오" />
+        </div>
+        <div class="inputItem">
+          <span> 시작날짜 ~ 마지막날짜 </span>
+          <div class="flexRow">
+            <select name="startYear" class="select">
+              <option disabled selected>연도</option>
+            </select>
+            <select name="startMonth" class="select">
+              <option disabled selected>월</option>
+            </select>
+            <select name="startDay" class="select">
+              <option disabled selected>일</option>
+            </select>
+            <select name="startHour" class="select">
+              <option disabled>시</option>
+            </select>
+            <select name="startMinute" class="select">
+              <option disabled>분</option>
+            </select>
+          </div>
+          <div class="flexRow">
+            <select name="endYear" class="select">
+              <option disabled selected>연도</option>
+            </select>
+            <select name="endMonth" class="select">
+              <option disabled selected>월</option>
+            </select>
+            <select name="endDay" class="select">
+              <option disabled selected>일</option>
+            </select>
+            <select name="endHour" class="select">
+              <option disabled>시</option>
+            </select>
+            <select name="endMinute" class="select">
+              <option disabled>분</option>
+            </select>
+          </div>
+        </div>
+        <div class="inputItem">
+          <span> 내용 </span>
+          <textarea placeholder="일정 내용을 작성해주세요."></textarea>
+        </div>
+        <div class="modalBtnContainer">
+          <button id="addCalendarHandlerBtn">일정추가</button>
+          <button class="modalCloseBtn">취소</button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

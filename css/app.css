@@ -59,53 +59,53 @@ section article {
   width: 100%;
   grid-template-columns: repeat(7, minmax(50px, 150px));
 }
-#monthContainer button {
+#monthContainer .dayContainer {
   display: grid;
-  background-color: #ffdcaf;
+  background-color: #ffffff;
   font-weight: 600;
   min-height: 60px;
   outline: 1px solid #666666;
   flex-flow: nowrap column;
   font-size: 2rem;
-  padding: 0px 0px 8px 0px;
-  gap: 2px;
-  grid-template-rows: repeat(4, 1fr);
+  gap: 4px;
+  -webkit-tap-highlight-color: transparent;
+  padding: 0px 0px 4px 0px;
 }
-#monthContainer button div {
-  background-color: blue;
-  grid-row-start: 4;
-  width: 200%;
-  height: 20px;
-  z-index: 2;
+#monthContainer .dayContainer .todoBar {
+  height: 24px;
+  z-index: 10;
   border-radius: 8px;
-}
-#monthContainer button span {
-  padding: 2px 4px;
+  font-size: 0.6em;
   display: flex;
-  justify-content: start;
-}
-#monthContainer button .block1 {
-  background-color: orange;
-  z-index: 20;
-  height: 16px;
-  display: flex;
+  justify-content: flex-start;
   align-items: center;
-  border-radius: 4px;
-  padding: 2px 0px;
-  font-size: min(2vw, 1.6rem);
+  color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-#monthContainer button .block1:hover {
-  box-shadow: 2px 2px rgba(1, 1, 1, 0.2);
+#monthContainer .dayContainer .todoBar:hover {
+  outline: 3px solid black;
 }
-#monthContainer button:nth-of-type(7n + 1) {
-  color: red;
+#monthContainer .dayContainer span {
+  padding: 2px 4px;
+  display: inline-flex;
+  justify-content: start;
+  background-color: #ffdca0;
 }
-#monthContainer button:nth-of-type(7n + 7) {
-  color: blue;
+#monthContainer .dayContainer:nth-of-type(7n + 1) {
+  color: #ff0000;
+}
+#monthContainer .dayContainer:nth-of-type(7n + 7) {
+  color: #0000ff;
+}
+#monthContainer .dayContainer:not(:has(.todoBar:hover)):hover {
+  z-index: 3;
+  outline: 3px solid black;
 }
 
 .modal {
-  visibility: hidden;
+  display: none;
 }
 
 #modalOverlay {
@@ -125,7 +125,7 @@ section article {
   width: 100%;
   max-width: min(80vw, 600px);
   overflow-y: auto;
-  height: min(600px, 80vh);
+  height: min(620px, 90vh);
   transform: translate(-50%, -50%);
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   z-index: 100;
@@ -141,7 +141,6 @@ section article {
   top: 0;
   transform: translateZ(0);
   outline: 1px solid black;
-  padding: 4px 0px;
   background-color: rgb(240, 240, 240);
 }
 #modal #modalHeaderContainer #modalHeaderTitle {
@@ -192,8 +191,7 @@ section article {
   padding: 10px;
   width: 80px;
 }
-
-.inputItem {
+#modalBodyContainer .inputItem {
   display: flex;
   flex-flow: nowrap column;
   padding: 10px 4px;
@@ -201,27 +199,29 @@ section article {
   font-size: 1.6rem;
   z-index: 30;
 }
-.inputItem span:nth-of-type(1) {
+#modalBodyContainer .inputItem span:nth-of-type(1) {
   font-size: 2rem;
   font-weight: 800;
 }
-.inputItem input {
+#modalBodyContainer .inputItem input {
   height: 40px;
   padding-left: 8px;
   background: none;
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   border-radius: 10px;
 }
-.inputItem input::placeholder {
-  color: #333333;
+#modalBodyContainer .inputItem input::placeholder {
+  color: rgba(51, 51, 51, 0.6);
+  font-weight: 800;
+  padding: 4px;
   font-size: 1.2rem;
 }
-.inputItem input:focus::placeholder {
+#modalBodyContainer .inputItem input:focus::placeholder {
   font-size: 10px;
   transform: translate(-6px, -10px);
 }
-.inputItem textarea {
-  min-height: 200px;
+#modalBodyContainer .inputItem textarea {
+  min-height: 100px;
   width: calc(100% - 16px);
   background: none;
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
@@ -230,10 +230,61 @@ section article {
   resize: none;
   padding: 8px;
 }
-.inputItem textarea::placeholder {
-  color: #333333;
+#modalBodyContainer .inputItem textarea::placeholder {
+  color: rgba(51, 51, 51, 0.6);
+  font-weight: 800;
   padding: 4px;
   font-size: 1.2rem;
+}
+#modalBodyContainer #colorContainer {
+  display: flex;
+  gap: 20px;
+  flex-flow: wrap row;
+  padding: 8px;
+  width: calc(100% - 16px);
+  background-color: white;
+}
+#modalBodyContainer #colorContainer input[type=radio] {
+  appearance: none;
+  box-shadow: none;
+  width: 40px;
+  aspect-ratio: 1;
+  background-color: red;
+}
+#modalBodyContainer #colorContainer input[type=radio] {
+  width: 40px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  opacity: 0.5;
+}
+#modalBodyContainer #colorContainer input[type=radio]:checked {
+  outline: 4px solid black;
+  outline-offset: 2px;
+  opacity: 1;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(1) {
+  background-color: red;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(2) {
+  background-color: blue;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(3) {
+  background-color: orange;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(4) {
+  background-color: green;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(5) {
+  background-color: purple;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(6) {
+  background-color: aquamarine;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(7) {
+  background-color: tomato;
+}
+#modalBodyContainer #colorContainer input[type=radio]:nth-of-type(8) {
+  background-color: chocolate;
 }
 
 .modalBtnContainer {

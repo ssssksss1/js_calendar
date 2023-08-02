@@ -37,7 +37,7 @@
     <div id="modalOverlay" class="modal"></div>
     <div id="modal" class="modal">
       <div id="modalHeaderContainer">
-        <div id="modalHeaderTitle">타이틀</div>
+        <div id="modalHeaderTitle">일정 추가</div>
         <div class="modalCloseBtn">
           <div></div>
           <div></div>
@@ -47,7 +47,7 @@
       <div id="modalBodyContainer">
         <div class="inputItem">
           <span> 일정 제목 </span>
-          <input type="text" placeholder="제목을입력하시오" />
+          <input id="todoTitle" type="text" placeholder="제목을입력하시오" />
         </div>
         <div class="inputItem">
           <span> 시작날짜 ~ 마지막날짜 </span>
@@ -88,10 +88,23 @@
         </div>
         <div class="inputItem">
           <span> 내용 </span>
-          <textarea placeholder="일정 내용을 작성해주세요."></textarea>
+          <textarea id="todoContent" placeholder="일정 내용을 작성해주세요."></textarea>
+        </div>
+        <div class="inputItem">
+          <span> 색상 </span>
+          <div id="colorContainer">
+            <input type="radio" name="todoColor" value="red" checked />
+            <input type="radio" name="todoColor" value="blue" />
+            <input type="radio" name="todoColor" value="orange" />
+            <input type="radio" name="todoColor" value="green" />
+            <input type="radio" name="todoColor" value="purple" />
+            <input type="radio" name="todoColor" value="aquamarine" />
+            <input type="radio" name="todoColor" value="tomato" />
+            <input type="radio" name="todoColor" value="chocolate" />
+          </div>
         </div>
         <div class="modalBtnContainer">
-          <button id="addCalendarHandlerBtn">일정추가</button>
+          <button id="submitAddCalendarHandler">일정추가</button>
           <button class="modalCloseBtn">취소</button>
         </div>
       </div>

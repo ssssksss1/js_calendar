@@ -18,6 +18,7 @@ let dummy = [
     endDate: "2023-08-15-00-00",
     backgroundColor: "blue",
   },
+
   {
     title: "제목2",
     content: "내용",
@@ -26,18 +27,11 @@ let dummy = [
     backgroundColor: "blue",
   },
   {
-    title: "제목2",
+    title: "제목3",
     content: "내용",
-    startDate: "2023-08-14-00-00",
-    endDate: "2023-08-15-00-00",
-    backgroundColor: "blue",
-  },
-  {
-    title: "제목2",
-    content: "내용",
-    startDate: "2023-08-14-00-00",
-    endDate: "2023-08-15-00-00",
-    backgroundColor: "blue",
+    startDate: "2023-08-17-00-00",
+    endDate: "2023-08-22-00-00",
+    backgroundColor: "green",
   },
   {
     title: "제목3",
@@ -246,9 +240,10 @@ let changeCalendar = (calendarYear, calendarMonth) => {
       );
     }
     let btn = document.createElement("button");
+    let dayContainerElement = document.createElement("div");
     btn.setAttribute("type", "button");
-    btn.setAttribute("class", "dayContainer");
-    btn.setAttribute("id", i[0]);
+    dayContainerElement.setAttribute("class", "dayContainer week_" + Math.floor(index / 7));
+    dayContainerElement.setAttribute("id", i[0]);
     let span = document.createElement("span");
     btn.addEventListener("click", () => {
       modalToggle();
@@ -265,7 +260,9 @@ let changeCalendar = (calendarYear, calendarMonth) => {
     });
     span.innerText = i[1].day;
     btn.append(span);
+    btn.append(dayContainerElement);
     weekContainer.append(btn);
+
     if ((index + 1) % 7 === 0) {
       monthContainer.append(weekContainer);
       weekContainer = document.createElement("div");
@@ -323,7 +320,16 @@ let submitAddTodoHandler = function () {
       return;
     }
     alert("일정이 추가되었습니다.");
-    dummy.push({
+
+    // 일정을 추가할 때 기존 데이터에서 시작날짜 순으로 넣어야 한다.
+    let tempIndex;
+    for (let i = 0; i < dummy.length; i++) {
+      if (dummy[i].startDate >= todoStartDate) {
+        tempIndex = i;
+        break;
+      }
+    }
+    dummy.splice(tempIndex, 0, {
       title: todoTitle,
       content: todoContent,
       startDate: todoStartDate,
@@ -374,7 +380,6 @@ let moveCalendarHandler = function (calendarYear, calendarMonth) {
  */
 let modalToggle = function () {
   document.getElementById("modal").classList.toggle("modal");
-  document.getElementById("modalOverlay").classList.toggle("modal");
 };
 
 /**
@@ -387,9 +392,6 @@ let modalCloseAddHandler = function () {
       modalToggle();
     });
   }
-  document.getElementById("modalOverlay").addEventListener("click", () => {
-    modalToggle();
-  });
 };
 
 /**
@@ -427,23 +429,18 @@ let dateTypeTo4Y2M2D = function (date) {
  */
 
 let showTodoBarOnCalendar = function () {
-  console.log("showTodoBarOnCalendar 함수 작동");
   if (dummy.length < 1) return;
   let removeTodoBar = document.getElementsByClassName("todoBar");
   for (let i = removeTodoBar.length - 1; i >= 0; i--) {
     removeTodoBar[i].remove();
   }
-  // 1층에는 span태그가 존재하여 2층부터 사용
-  let barLayer = 2;
+  let barLayer = 1;
   let standardEndDate = "1950-01-01";
   let dummyCopy = [...dummy];
-  let whileCountError = 0;
-  while (dummyCopy.length !== 0 || whileCountError > 1000) {
+  while (dummyCopy.length !== 0) {
     let weekLayer = 0;
     standardEndDate = "1950-01-01";
     let removeIndex = [];
-    // startDate: "2023-07-31-00-00",
-    // endDate: "2023-08-16-00-00",
     // console.log("barLayer :" + barLayer);
 
     // console.log(
@@ -452,6 +449,7 @@ let showTodoBarOnCalendar = function () {
     // );
     // 일정을 반복하면서 첫번째 줄부터 이어서 나가는 방식
     dummyCopy.map((i, index) => {
+      // 보이지는 달력과 상관없는 일정은 제외한다.
       if (
         i.endDate.substring(0, 10) > dateTypeTo4Y2M2D(calendarWeekStartDateList[0]) &&
         i.startDate.substring(0, 10) <
@@ -486,7 +484,8 @@ let showTodoBarOnCalendar = function () {
               // );
               // 현재 줄에 들어가야할 블록의 갯수
               let numberOfExtraBlocks = todoInterval;
-              let blocksNumberOfCurrentLine = todoInterval > 7 ? 7 - todoStartDateIndex : todoInterval;
+              let blocksNumberOfCurrentLine =
+                todoStartDateIndex + todoInterval > 7 ? 7 - todoStartDateIndex : todoInterval;
               while (blocksNumberOfCurrentLine > 0) {
                 // console.log(
                 //   "numberOfExtraBlocks : " +
@@ -497,21 +496,32 @@ let showTodoBarOnCalendar = function () {
                 let weekStartDateToString = dateTypeTo4Y2M2D(
                   new Date(calendarWeekStartDateList[weekLayer].getTime() + todoStartDateIndex * 24 * 3600 * 1000)
                 );
-                let weekContainerElement = document.getElementById(weekStartDateToString);
+                let dayContainerElement = document.getElementById(weekStartDateToString);
                 let todoBarElement = document.createElement("div");
                 todoBarElement.setAttribute("class", "todoBar");
                 let padding = 4;
-                todoBarElement.style.width = "calc(" + 100 * blocksNumberOfCurrentLine + "%)";
                 if ((numberOfExtraBlocks -= blocksNumberOfCurrentLine <= 0) && numberOfExtraBlocks < 7) {
-                  todoBarElement.style.width = "calc(" + 100 * blocksNumberOfCurrentLine + "% - " + padding * 2 + "px)";
+                  todoBarElement.style.width =
+                    "calc(" + 100 * blocksNumberOfCurrentLine + "% - " + (padding * 2 + 3) + "px)";
+                } else {
+                  todoBarElement.style.width = "calc(" + 100 * blocksNumberOfCurrentLine + "% - " + 6 + "px)";
                 }
+
+                // dayContainerElement.style.gridRowStart = barLayer;
                 todoBarElement.style.gridRowStart = barLayer;
+                todoBarElement.style.paddingLeft = "4px";
+                todoBarElement.style.marginLeft = "1px";
                 todoBarElement.style.backgroundColor = i.backgroundColor;
                 todoBarElement.innerText = i.title;
                 todoBarElement.addEventListener("click", (e) => {
                   e.stopPropagation();
                 });
-                weekContainerElement.append(todoBarElement);
+                dayContainerElement.append(todoBarElement);
+
+                let gridTemplateRowsStyle = document.getElementsByClassName("week_" + weekLayer);
+                for (k = 0; k < gridTemplateRowsStyle.length; k++) {
+                  gridTemplateRowsStyle[k].style.gridTemplateRows = "repeat(" + barLayer + ", 1fr)";
+                }
 
                 numberOfExtraBlocks -= blocksNumberOfCurrentLine;
                 blocksNumberOfCurrentLine = numberOfExtraBlocks >= 7 ? 7 : numberOfExtraBlocks;
@@ -534,15 +544,14 @@ let showTodoBarOnCalendar = function () {
         removeIndex.unshift(index);
       }
     });
-    let temp = document.getElementsByClassName("dayContainer");
-    for (let i = 0; i < temp.length; i++) {
-      temp[i].style.gridTemplateRows = "repeat(" + barLayer + ", 1fr)";
-    }
+    // let temp = document.getElementsByClassName("dayContainer");
+    // for (let i = 0; i < temp.length; i++) {
+    //   temp[i].style.gridTemplateRows = "repeat(" + barLayer + ", 1fr)";
+    // }
     barLayer += 1;
     removeIndex.map((k) => {
       dummyCopy.splice(k, 1);
     });
-    whileCountError++;
   }
 };
 

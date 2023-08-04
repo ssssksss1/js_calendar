@@ -1,11 +1,28 @@
-section {
-  margin: auto;
-  max-width: 1200px;
-}
-section article {
+body {
   display: flex;
-  flex-flow: nowrap column;
-  align-items: center;
+  width: 100vw;
+}
+@media all and (min-width: 1080px) {
+  body {
+    justify-content: start;
+  }
+}
+@media all and (max-width: 1080px) {
+  body {
+    justify-content: center;
+    width: 100vw;
+  }
+}
+body section {
+  width: 100%;
+}
+@media all and (min-width: 1080px) {
+  body section {
+    width: 100%;
+  }
+}
+body section article {
+  width: 100%;
 }
 
 #calendarHeader {
@@ -33,7 +50,8 @@ section article {
 
 #dayOfTheWeekContainer {
   display: grid;
-  grid-template-columns: repeat(7, minmax(50px, 150px));
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
 }
 #dayOfTheWeekContainer div {
   text-align: center;
@@ -50,30 +68,47 @@ section article {
 }
 
 #monthContainer {
-  max-height: 60px;
+  width: 100%;
 }
 #monthContainer .weekContainer {
-  display: grid;
-  height: 100%;
-  background-color: red;
   width: 100%;
-  grid-template-columns: repeat(7, minmax(50px, 150px));
-}
-#monthContainer .dayContainer {
+  min-height: 14.2857142857vh;
   display: grid;
+  align-items: start;
+  grid-template-columns: repeat(7, 1fr);
+}
+#monthContainer .weekContainer > button {
+  align-items: start;
   background-color: #ffffff;
   font-weight: 600;
-  min-height: 60px;
   outline: 1px solid #666666;
-  flex-flow: nowrap column;
-  font-size: 2rem;
-  gap: 4px;
+  font-size: 1.4rem;
+  display: flex;
+  flex-flow: wrap column;
   -webkit-tap-highlight-color: transparent;
-  padding: 0px 0px 4px 0px;
+  height: 100%;
+  position: relative;
+  padding: 22px 0px 2px 0px;
 }
-#monthContainer .dayContainer .todoBar {
-  height: 24px;
+#monthContainer .weekContainer > button span {
+  padding: 2px 4px;
+  display: inline-flex;
+  justify-content: start;
+  background-color: #ffdca0;
+  border-radius: 20px;
+  position: absolute;
+  top: 0px;
+}
+#monthContainer .weekContainer > button .dayContainer {
   z-index: 10;
+  display: grid;
+  gap: 2px;
+  width: 100%;
+  align-items: start;
+}
+#monthContainer .weekContainer > button .todoBar {
+  max-height: 12px;
+  z-index: 20;
   border-radius: 8px;
   font-size: 0.6em;
   display: flex;
@@ -84,22 +119,16 @@ section article {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-#monthContainer .dayContainer .todoBar:hover {
+#monthContainer .weekContainer > button .todoBar:hover {
   outline: 3px solid black;
 }
-#monthContainer .dayContainer span {
-  padding: 2px 4px;
-  display: inline-flex;
-  justify-content: start;
-  background-color: #ffdca0;
-}
-#monthContainer .dayContainer:nth-of-type(7n + 1) {
+#monthContainer .weekContainer > button:nth-of-type(7n + 1) {
   color: #ff0000;
 }
-#monthContainer .dayContainer:nth-of-type(7n + 7) {
+#monthContainer .weekContainer > button:nth-of-type(7n + 7) {
   color: #0000ff;
 }
-#monthContainer .dayContainer:not(:has(.todoBar:hover)):hover {
+#monthContainer .weekContainer > button:not(:has(.todoBar:hover)):hover {
   z-index: 3;
   outline: 3px solid black;
 }
@@ -108,28 +137,35 @@ section article {
   display: none;
 }
 
-#modalOverlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(127, 127, 127, 0.8);
-  z-index: 100;
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
-
 #modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  max-width: min(80vw, 600px);
+  top: 0;
+  right: 0;
   overflow-y: auto;
-  height: min(620px, 90vh);
-  transform: translate(-50%, -50%);
+  height: 100vh;
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   z-index: 100;
   background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);
+  animation: fadein 0.5s linear;
+}
+@media all and (min-width: 1080px) {
+  #modal {
+    width: 500px;
+    position: static;
+  }
+}
+@media all and (max-width: 1080px) {
+  #modal {
+    width: 300px;
+  }
 }
 #modal #modalHeaderContainer {
   width: 100%;
@@ -188,8 +224,13 @@ section article {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  padding: 10px;
+  padding: 4px 2px;
   width: 80px;
+  text-align: center;
+}
+#modalBodyContainer select option {
+  height: 200px;
+  overflow: scroll;
 }
 #modalBodyContainer .inputItem {
   display: flex;

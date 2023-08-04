@@ -1,11 +1,25 @@
-section {
-  margin: auto;
-  max-width: 1200px;
+body {
+  display: flex;
+  width: 100vw;
 
-  article {
-    display: flex;
-    flex-flow: nowrap column;
-    align-items: center;
+  @media all and (min-width: 1080px) {
+    justify-content: start;
+  }
+  @media all and (max-width: 1080px) {
+    justify-content: center;
+    width: 100vw;
+  }
+
+  section {
+    width: 100%;
+
+    @media all and (min-width: 1080px) {
+      width: 100%;
+    }
+
+    article {
+      width: 100%;
+    }
   }
 }
 
@@ -36,7 +50,9 @@ section {
 
 #dayOfTheWeekContainer {
   display: grid;
-  grid-template-columns: repeat(7, minmax(50px, 150px));
+  // grid-template-columns: repeat(7, minmax(50px, 150px));
+  width: 100%;
+  grid-template-columns: repeat(7, 1fr);
 
   div {
     text-align: center;
@@ -55,67 +71,118 @@ section {
 }
 
 #monthContainer {
-  max-height: 60px;
+  // 이거 뭐지?
+  // max-height: 60px;
+  width: 100%;
 
   .weekContainer {
-    display: grid;
-    height: 100%;
-    background-color: red;
     width: 100%;
-    grid-template-columns: repeat(7, minmax(50px, 150px));
-  }
-
-  .dayContainer {
+    // grid-template-columns: repeat(7, minmax(50px, 150px));
+    min-height: calc(100vh / 7);
     display: grid;
-    // align-items: start;
-    background-color: #ffffff;
-    font-weight: 600;
-    min-height: 60px;
-    outline: 1px solid #666666;
-    flex-flow: nowrap column;
-    font-size: 2rem;
-    gap: 4px;
-    -webkit-tap-highlight-color: transparent;
-    padding: 0px 0px 4px 0px;
+    align-items: start;
+    grid-template-columns: repeat(7, 1fr);
+    // height: 100%;
 
-    .todoBar {
-      height: 24px;
-      z-index: 10;
-      border-radius: 8px;
-      font-size: 0.6em;
+    & > button {
+      align-items: start;
+      background-color: #ffffff;
+      font-weight: 600;
+      outline: 1px solid #666666;
+      font-size: 1.4rem;
       display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      color: white;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      flex-flow: wrap column;
+      -webkit-tap-highlight-color: transparent;
+      height: 100%;
+      position: relative;
+      padding: 22px 0px 2px 0px;
+
+      span {
+        padding: 2px 4px;
+        display: inline-flex;
+        justify-content: start;
+        background-color: #ffdca0;
+        border-radius: 20px;
+        position: absolute;
+        top: 0px;
+      }
+
+      .dayContainer {
+        z-index: 10;
+        display: grid;
+        gap: 2px;
+        width: 100%;
+        align-items: start;
+      }
+
+      .todoBar {
+        max-height: 12px;
+        z-index: 20;
+        border-radius: 8px;
+        font-size: 0.6em;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        color: white;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .todoBar:hover {
+        outline: 3px solid black;
+      }
     }
 
-    .todoBar:hover {
+    & > button:nth-of-type(7n + 1) {
+      color: #ff0000;
+    }
+    & > button:nth-of-type(7n + 7) {
+      color: #0000ff;
+    }
+    & > button:not(:has(.todoBar:hover)):hover {
+      // box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
+      z-index: 3;
       outline: 3px solid black;
     }
-
-    span {
-      padding: 2px 4px;
-      display: inline-flex;
-      justify-content: start;
-      background-color: #ffdca0;
-    }
   }
 
-  .dayContainer:nth-of-type(7n + 1) {
-    color: #ff0000;
-  }
-  .dayContainer:nth-of-type(7n + 7) {
-    color: #0000ff;
-  }
+  // .dayContainer {
+  //   width: calc(100% / 7);
+  //   display: grid;
+  //   // align-items: start;
+  //   background-color: #ffffff;
+  //   font-weight: 600;
+  //   outline: 1px solid #666666;
+  //   font-size: 1.4rem;
+  //   gap: 4px;
+  //   -webkit-tap-highlight-color: transparent;
+  //   padding: 0px 0px 4px 0px;
+  //   min-height: 100px;
 
-  .dayContainer:not(:has(.todoBar:hover)):hover {
-    // box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
-    z-index: 3;
-    outline: 3px solid black;
-  }
+  //   .todoBar {
+  //     z-index: 10;
+  //     border-radius: 8px;
+  //     font-size: 0.6em;
+  //     display: flex;
+  //     justify-content: flex-start;
+  //     align-items: center;
+  //     color: white;
+  //     white-space: nowrap;
+  //     overflow: hidden;
+  //   }
+
+  //   .todoBar:hover {
+  //     outline: 3px solid black;
+  //   }
+
+  //   span {
+  //     padding: 2px 4px;
+  //     display: inline-flex;
+  //     justify-content: start;
+  //     background-color: #ffdca0;
+  //   }
+  // }
 }
 
 .modal {
@@ -123,28 +190,34 @@ section {
   display: none;
 }
 
-#modalOverlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(127, 127, 127, 0.8);
-  z-index: 100;
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 #modal {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 100%;
-  max-width: min(80vw, 600px);
+  top: 0;
+  right: 0;
   overflow-y: auto;
-  height: min(620px, 90vh);
-  transform: translate(-50%, -50%);
+  height: 100vh;
+  // transform: translate(-50%, 0%);
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   z-index: 100;
   background: linear-gradient(lightCyan, skyBlue, deepSkyBlue);
+  animation: fadein 0.5s linear;
+
+  @media all and (min-width: 1080px) {
+    width: 500px;
+    position: static;
+  }
+  @media all and (max-width: 1080px) {
+    width: 300px;
+  }
 
   #modalHeaderContainer {
     width: 100%;
@@ -210,8 +283,14 @@ section {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    padding: 10px;
+    padding: 4px 2px;
     width: 80px;
+    text-align: center;
+
+    option {
+      height: 200px;
+      overflow: scroll;
+    }
   }
   .inputItem {
     display: flex;
@@ -262,9 +341,6 @@ section {
         padding: 4px;
         font-size: 1.2rem;
       }
-    }
-
-    textarea:focus {
     }
   }
 

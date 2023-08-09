@@ -101,7 +101,7 @@ body {
         padding: 2px 4px;
         display: inline-flex;
         justify-content: start;
-        background-color: #ffdca0;
+        // background-color: #ffdca0;
         border-radius: 20px;
         position: absolute;
         top: 0px;
@@ -144,43 +144,6 @@ body {
       outline: 3px solid black;
     }
   }
-
-  // .dayContainer {
-  //   width: calc(100% / 7);
-  //   display: grid;
-  //   // align-items: start;
-  //   background-color: #ffffff;
-  //   font-weight: 600;
-  //   outline: 1px solid #666666;
-  //   font-size: 1.4rem;
-  //   gap: 4px;
-  //   -webkit-tap-highlight-color: transparent;
-  //   padding: 0px 0px 4px 0px;
-  //   min-height: 100px;
-
-  //   .todoBar {
-  //     z-index: 10;
-  //     border-radius: 8px;
-  //     font-size: 0.6em;
-  //     display: flex;
-  //     justify-content: flex-start;
-  //     align-items: center;
-  //     color: white;
-  //     white-space: nowrap;
-  //     overflow: hidden;
-  //   }
-
-  //   .todoBar:hover {
-  //     outline: 3px solid black;
-  //   }
-
-  //   span {
-  //     padding: 2px 4px;
-  //     display: inline-flex;
-  //     justify-content: start;
-  //     background-color: #ffdca0;
-  //   }
-  // }
 }
 
 .modal {
@@ -206,7 +169,8 @@ body {
   // transform: translate(-50%, 0%);
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   z-index: 100;
-  background: linear-gradient(#e0fffffb, #87ceebfb, #00bffffb);
+  // background: linear-gradient(#e0fffffb, #87ceebfb, #00bffffb);
+  background-color: #ffffffff;
   animation: fadeIn 0.5s linear;
 
   @media all and (min-width: 1080px) {
@@ -221,19 +185,13 @@ body {
     width: 100%;
     height: 40px;
     display: flex;
-    justify-content: space-between;
+    justify-content: right;
     align-items: center;
     position: sticky;
     top: 0;
     transform: translateZ(0);
     outline: 1px solid black;
     background-color: #f0f0f0ff;
-
-    #modalHeaderTitle {
-      font-size: 16px;
-      font-weight: 800;
-      padding-left: 8px;
-    }
 
     .modalCloseBtn {
       cursor: pointer;
@@ -298,9 +256,20 @@ body {
     font-size: 1.6rem;
     z-index: 30;
 
-    span:nth-of-type(1) {
+    & > span {
       font-size: 2rem;
       font-weight: 800;
+      display: flex;
+      flex-flow: nowrap row;
+      align-items: center;
+    }
+
+    #inputItemTitleErrorMsg,
+    #inputItemContentErrorMsg,
+    #inputItemDateErrorMsg {
+      color: #ff0000ff;
+      font-size: 1rem;
+      padding-left: 4px;
     }
 
     input {
@@ -341,6 +310,13 @@ body {
       }
     }
   }
+  .inputItem:nth-of-type(2) {
+    & > span {
+      display: flex;
+      flex-flow: nowrap column;
+      align-items: start;
+    }
+  }
 
   #colorContainer {
     display: flex;
@@ -370,28 +346,28 @@ body {
       opacity: 1;
     }
     input[type="radio"]:nth-of-type(1) {
-      background-color: red;
+      background-color: #ff0000;
     }
     input[type="radio"]:nth-of-type(2) {
-      background-color: blue;
+      background-color: #0000ff;
     }
     input[type="radio"]:nth-of-type(3) {
-      background-color: orange;
+      background-color: #ffa500;
     }
     input[type="radio"]:nth-of-type(4) {
-      background-color: green;
+      background-color: #008000;
     }
     input[type="radio"]:nth-of-type(5) {
-      background-color: purple;
+      background-color: #800080;
     }
     input[type="radio"]:nth-of-type(6) {
-      background-color: aquamarine;
+      background-color: #7fffd4;
     }
     input[type="radio"]:nth-of-type(7) {
-      background-color: tomato;
+      background-color: #ff6347;
     }
     input[type="radio"]:nth-of-type(8) {
-      background-color: chocolate;
+      background-color: #d2691e;
     }
   }
 }
@@ -413,29 +389,90 @@ body {
   }
 }
 
-// #tooltipContainer {
-//   max-width: 360px;
-//   width: 80vw;
-//   height: 140px;
-//   display: grid;
-//   grid-template-rows: 40px 100px;
+.isTodoBarIntro {
+  display: none;
+}
 
-//   header {
-//     display: flex;
-//     justify-content: right;
-//     gap: 4px;
-//     background-color: #f0f0f0f0;
-//   }
+#todoBarIntroContainerOverlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: none;
+  z-index: 50;
 
-//   section {
-//     background-color: red;
-//     display: grid;
-//     grid-template-rows: 1fr 1fr;
+  #todoBarIntroContainer {
+    width: 300px;
+    max-width: 60vw;
+    height: 140px;
+    display: grid;
+    grid-template-rows: 40px 100px;
+    position: fixed;
+    z-index: 52;
+    background-color: #ffffffff;
+    outline: solid 1px #333333ff;
+    font-size: 1.6rem;
 
-//     div {
-//       display: flex;
-//       align-items: center;
-//       padding-left: 8px;
-//     }
-//   }
-// }
+    header {
+      display: flex;
+      justify-content: right;
+      gap: 8px;
+      padding-right: 4px;
+      background-color: #f0f0f0f0;
+
+      input[type="checkbox"] {
+        width: 24px;
+        height: 24px;
+        align-self: center;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+        position: relative;
+      }
+
+      button::before {
+        content: attr(data-tooltip);
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #fff;
+        padding: 10px 7px;
+        border-radius: 10px;
+        top: 40px;
+        opacity: 0; /* 기본 상태는 안보이게 */
+        transition: all 0.5s linear; /* 나타났다 사라지는 애니메이션 */
+      }
+
+      button:nth-of-type(1)::before {
+        right: 60px;
+      }
+      button:nth-of-type(2)::before {
+        right: 30px;
+      }
+      button:nth-of-type(3)::before {
+        right: 0px;
+      }
+      button:hover::before {
+        opacity: 1;
+      }
+    }
+
+    section {
+      display: grid;
+      grid-template-rows: 1fr 1fr;
+
+      div {
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+      }
+
+      #todoBarIntroContent {
+      }
+
+      #todoBarIntroDate {
+        font-size: 1.2rem;
+      }
+    }
+  }
+}

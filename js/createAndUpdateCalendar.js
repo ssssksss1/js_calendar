@@ -108,8 +108,6 @@ let createAndUpdateCalendar = function createAndUpdateCalendar(calendarYear, cal
       modalToggle();
       document.getElementById("todoTitle").value = "";
       document.getElementById("todoContent").value = "";
-      document.getElementById("modalHeaderContainer").style.backgroundColor = "#f0f0f0ff";
-      document.getElementById("modalHeaderTitle").innerText = "일정 추가";
       document.querySelector("select[name='startYear']").value = Number(i[0].substring(0, 4));
       document.querySelector("select[name='startMonth']").value = Number(i[0].substring(5, 7));
       document.querySelector("select[name='endYear']").value = Number(i[0].substring(0, 4));

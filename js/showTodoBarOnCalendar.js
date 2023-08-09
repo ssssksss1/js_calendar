@@ -2,14 +2,11 @@ import dateTypeToString4Y2M2D from "./dateTypeToString4Y2M2D.js";
 import dayIntervalCalc from "./dayIntervalCalc.js";
 import { todoDataList, todoId, changeTodoId, calendarWeekStartDateList } from "./app.js";
 import { modalOpen } from "./modalFunction.js";
-
 /**
  * @content 달력에 일정을 추가해주는 함수
  * - 데이터는 무조건 startDate 기준을 오름차순으로 보내주어야 한다.(중요)
  */
 let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
-  // 1. todoData가 있는지 확인
-  if (todoDataList.length < 1) return;
   let removeTodoBar = document.getElementsByClassName("todoBar");
   // 2. 기존에 보이는 todoBar들을 모두 삭제
   for (let i = removeTodoBar.length - 1; i >= 0; i--) {
@@ -94,6 +91,7 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                 let dayContainerElement = document.getElementById(weekStartDateToString);
                 let todoBarElement = document.createElement("div");
                 todoBarElement.setAttribute("class", "todoBar");
+                todoBarElement.setAttribute("data-id", i.id);
                 let padding = 4;
                 if ((numberOfExtraBlocks -= blocksNumberOfCurrentLine <= 0) && numberOfExtraBlocks < 7) {
                   todoBarElement.style.width =
@@ -105,13 +103,38 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                 todoBarElement.style.gridRowStart = barLayer;
                 todoBarElement.style.paddingLeft = "4px";
                 todoBarElement.style.marginLeft = "1px";
-                todoBarElement.style.backgroundColor = i.backgroundColor;
+                if (i.isExist === false) {
+                  todoBarElement.style.backgroundColor = i.backgroundColor + "77";
+                } else {
+                  todoBarElement.style.backgroundColor = i.backgroundColor;
+                }
                 todoBarElement.innerText = i.title;
                 todoBarElement.addEventListener("click", (e) => {
+                  e.stopPropagation();
+                  document.getElementById("todoBarIntroContainerOverlay").classList.toggle("isTodoBarIntro");
+                  let w = document.getElementById("calendarContainer").clientWidth;
+                  if (w < e.clientX + 300) {
+                    document.getElementById("todoBarIntroContainer").style.left =
+                      ((w - 320) / w) * ((100 * w) / window.innerWidth) + "%";
+                    if (window.innerHeight / 2 < e.clientY) {
+                      document.getElementById("todoBarIntroContainer").style.top = e.clientY - 162 + "px";
+                    } else {
+                      document.getElementById("todoBarIntroContainer").style.top = e.clientY + 22 + "px";
+                    }
+                  } else {
+                    document.getElementById("todoBarIntroContainer").style.left =
+                      ((e.clientX - 20) / w) * ((100 * w) / window.innerWidth) + "%";
+                    if (window.innerHeight / 2 < e.clientY) {
+                      document.getElementById("todoBarIntroContainer").style.top = e.clientY - 162 + "px";
+                    } else {
+                      document.getElementById("todoBarIntroContainer").style.top = e.clientY + 22 + "px";
+                    }
+                  }
+                  document.getElementById("todoBarIntroContent").innerText = i.content;
+                  document.getElementById("todoBarIntroDate").innerText = i.startDate + " ~ " + i.endDate;
+
+                  // 미리 수정할 값들을 넣어두기
                   changeTodoId(i.id);
-                  modalOpen();
-                  document.getElementById("modalHeaderTitle").innerText = "일정 수정";
-                  document.getElementById("modalHeaderContainer").style.backgroundColor = i.backgroundColor;
                   document.getElementById("todoTitle").value = i.title;
                   document.getElementById("todoContent").value = i.content;
                   document.querySelector("select[name='startYear']").value = Number(i.startDate.substring(0, 4));
@@ -131,7 +154,6 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                     }
                   });
                   document.getElementById("submitAddCalendarHandler").innerText = "일정 수정";
-                  e.stopPropagation();
                 });
                 dayContainerElement.append(todoBarElement);
 

@@ -15,8 +15,6 @@ let createCalendarForm = function createCalendarForm() {
   let endMinute = document.querySelector("select[name='endMinute']");
   let todoTitle = document.getElementById("todoTitle");
   let todoContent = document.getElementById("todoContent");
-  let modalHeaderContainer = document.getElementById("modalHeaderContainer");
-  let modalHeaderTitle = document.getElementById("modalHeaderTitle");
   let submitAddCalendarHandler = document.getElementById("submitAddCalendarHandler");
 
   for (let i = 1990; i < 2050; i++) {

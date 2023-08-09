@@ -1,3 +1,4 @@
+@charset "UTF-8";
 body {
   display: flex;
   width: 100vw;
@@ -94,7 +95,6 @@ body section article {
   padding: 2px 4px;
   display: inline-flex;
   justify-content: start;
-  background-color: #ffdca0;
   border-radius: 20px;
   position: absolute;
   top: 0px;
@@ -151,7 +151,7 @@ body section article {
   height: 100vh;
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   z-index: 100;
-  background: linear-gradient(rgba(224, 255, 255, 0.9843137255), rgba(135, 206, 235, 0.9843137255), rgba(0, 191, 255, 0.9843137255));
+  background-color: white;
   animation: fadeIn 0.5s linear;
 }
 @media all and (min-width: 1080px) {
@@ -169,18 +169,13 @@ body section article {
   width: 100%;
   height: 40px;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   position: sticky;
   top: 0;
   transform: translateZ(0);
   outline: 1px solid black;
   background-color: #f0f0f0;
-}
-#modal #modalHeaderContainer #modalHeaderTitle {
-  font-size: 16px;
-  font-weight: 800;
-  padding-left: 8px;
 }
 #modal #modalHeaderContainer .modalCloseBtn {
   cursor: pointer;
@@ -238,9 +233,19 @@ body section article {
   font-size: 1.6rem;
   z-index: 30;
 }
-#modalBodyContainer .inputItem span:nth-of-type(1) {
+#modalBodyContainer .inputItem > span {
   font-size: 2rem;
   font-weight: 800;
+  display: flex;
+  flex-flow: nowrap row;
+  align-items: center;
+}
+#modalBodyContainer .inputItem #inputItemTitleErrorMsg,
+#modalBodyContainer .inputItem #inputItemContentErrorMsg,
+#modalBodyContainer .inputItem #inputItemDateErrorMsg {
+  color: red;
+  font-size: 1rem;
+  padding-left: 4px;
 }
 #modalBodyContainer .inputItem input {
   height: 40px;
@@ -275,6 +280,11 @@ body section article {
   padding: 4px;
   font-size: 1.2rem;
 }
+#modalBodyContainer .inputItem:nth-of-type(2) > span {
+  display: flex;
+  flex-flow: nowrap column;
+  align-items: start;
+}
 #modalBodyContainer #colorContainer {
   display: flex;
   gap: 20px;
@@ -302,28 +312,28 @@ body section article {
   opacity: 1;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(1) {
-  background-color: red;
+  background-color: #ff0000;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(2) {
-  background-color: blue;
+  background-color: #0000ff;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(3) {
-  background-color: orange;
+  background-color: #ffa500;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(4) {
-  background-color: green;
+  background-color: #008000;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(5) {
-  background-color: purple;
+  background-color: #800080;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(6) {
-  background-color: aquamarine;
+  background-color: #7fffd4;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(7) {
-  background-color: tomato;
+  background-color: #ff6347;
 }
 #modalBodyContainer #colorContainer input[type=radio]:nth-of-type(8) {
-  background-color: chocolate;
+  background-color: #d2691e;
 }
 
 .modalBtnContainer {
@@ -340,6 +350,82 @@ body section article {
   background: none;
   box-shadow: -1px -1px 1px 1px black, 1px 1px 1px 1px black;
   border-radius: 10px;
+}
+
+.isTodoBarIntro {
+  display: none;
+}
+
+#todoBarIntroContainerOverlay {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background-color: none;
+  z-index: 50;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer {
+  width: 300px;
+  max-width: 60vw;
+  height: 140px;
+  display: grid;
+  grid-template-rows: 40px 100px;
+  position: fixed;
+  z-index: 52;
+  background-color: white;
+  outline: solid 1px #333333;
+  font-size: 1.6rem;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header {
+  display: flex;
+  justify-content: right;
+  gap: 8px;
+  padding-right: 4px;
+  background-color: rgba(240, 240, 240, 0.9411764706);
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header input[type=checkbox] {
+  width: 24px;
+  height: 24px;
+  align-self: center;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header img {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header button::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  padding: 10px 7px;
+  border-radius: 10px;
+  top: 40px;
+  opacity: 0; /* 기본 상태는 안보이게 */
+  transition: all 0.5s linear; /* 나타났다 사라지는 애니메이션 */
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header button:nth-of-type(1)::before {
+  right: 60px;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header button:nth-of-type(2)::before {
+  right: 30px;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header button:nth-of-type(3)::before {
+  right: 0px;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer header button:hover::before {
+  opacity: 1;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer section {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer section div {
+  display: flex;
+  align-items: center;
+  padding-left: 8px;
+}
+#todoBarIntroContainerOverlay #todoBarIntroContainer section #todoBarIntroDate {
+  font-size: 1.2rem;
 }
 
 /*# sourceMappingURL=app.css.map */

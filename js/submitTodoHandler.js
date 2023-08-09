@@ -41,27 +41,58 @@ let submitTodoHandler = function submitTodoHandler() {
       "-" +
       endMinute.padStart(2, "0");
     let todoBackgroundColor = document.querySelector("input[name='todoColor']:checked").value;
-    if (todoTitle === "" || todoContent === "") {
-      alert("일정의 제목이나 내용이 비어있습니다.");
+    // 유효성 검사
+    if (todoTitle === "") {
+      document.getElementById("inputItemTitleErrorMsg").innerText = "제목을 작성해주세요";
+      return;
+    }
+    if (todoContent === "") {
+      document.getElementById("inputItemTitleErrorMsg").innerText = "";
+      document.getElementById("inputItemContentErrorMsg").innerText = "내용을 작성해주세요";
       return;
     }
     if (todoStartDate > todoEndDate) {
-      alert("시작날짜가 마지막날짜보다 더 늦습니다");
+      document.getElementById("inputItemTitleErrorMsg").innerText = "";
+      document.getElementById("inputItemContentErrorMsg").innerText = "";
+      document.getElementById("inputItemDateErrorMsg").innerText = "시작날짜가 마지막날짜보다 더 늦습니다";
       return;
     }
-    todoId !== null ? alert("일정이 수정되었습니다.") : alert("일정이 추가되었습니다.");
+    document.getElementById("inputItemTitleErrorMsg").innerText = "";
+    document.getElementById("inputItemContentErrorMsg").innerText = "";
+    document.getElementById("inputItemDateErrorMsg").innerText = "";
+    todoId !== null
+      ? Toastify({
+          text: "일정이 수정되었습니다.",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          className: "info",
+          duration: 2000,
+        }).showToast()
+      : Toastify({
+          text: "일정이 추가되었습니다.",
+          backgroundColor: "linear-gradient(to right, #00b09b, #96c93d)",
+          className: "info",
+          duration: 2000,
+        }).showToast();
+
+    var myToast = Toastify({
+      text: "This is a toast message",
+      duration: 5000,
+    });
+
+    let isExist = true;
     // 수정
     if (todoId !== null) {
       let removeIndex;
       todoDataList.map((i, index) => {
         if (i.id === todoId) {
           removeIndex = index;
+          isExist = i.isExist;
         }
       });
       todoDataList.splice(removeIndex, 1);
     }
     // 일정을 추가할 때 기존 데이터에서 시작날짜 순으로 넣어야 한다.
-    let tempIndex;
+    let tempIndex = todoDataList.length;
     for (let i = 0; i < todoDataList.length; i++) {
       if (todoDataList[i].startDate >= todoStartDate) {
         tempIndex = i;
@@ -76,6 +107,7 @@ let submitTodoHandler = function submitTodoHandler() {
       startDate: todoStartDate,
       endDate: todoEndDate,
       backgroundColor: todoBackgroundColor,
+      isExist: isExist,
     });
     showTodoBarOnCalendar();
     modalToggle();

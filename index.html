@@ -6,13 +6,14 @@
     <meta name="viewport" content="" width="device-width," initial-scale="1.0" />
     <title>홈</title>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css" />
     <link rel="stylesheet" href="./css/app.css" />
   </head>
   <body>
     <!-- <nav>
       <button type="button" onclick="location.href='index.html' ">홈</button>
     </nav> -->
-    <section>
+    <section id="calendarContainer">
       <header id="calendarHeader">
         <button id="prevMonthMoveBtn">◀️</button>
         <button id="dateYearAndMonth">
@@ -36,7 +37,6 @@
     </section>
     <div id="modal" class="modal">
       <div id="modalHeaderContainer">
-        <div id="modalHeaderTitle">일정 추가</div>
         <div class="modalCloseBtn">
           <div></div>
           <div></div>
@@ -45,11 +45,17 @@
       </div>
       <div id="modalBodyContainer">
         <div class="inputItem">
-          <span> 일정 제목 </span>
+          <span>
+            일정 제목
+            <div id="inputItemTitleErrorMsg"></div>
+          </span>
           <input id="todoTitle" type="text" placeholder="제목을입력하시오" />
         </div>
         <div class="inputItem">
-          <span> 시작날짜 ~ 마지막날짜 </span>
+          <span>
+            시작날짜 ~ 마지막날짜
+            <div id="inputItemDateErrorMsg"></div>
+          </span>
           <div class="flexRow">
             <select name="startYear" class="select">
               <option disabled selected>연도</option>
@@ -86,20 +92,23 @@
           </div>
         </div>
         <div class="inputItem">
-          <span> 내용 </span>
+          <span>
+            내용
+            <div id="inputItemContentErrorMsg"></div>
+          </span>
           <textarea id="todoContent" placeholder="일정 내용을 작성해주세요."></textarea>
         </div>
         <div class="inputItem">
           <span> 색상 </span>
           <div id="colorContainer">
-            <input type="radio" name="todoColor" value="red" checked />
-            <input type="radio" name="todoColor" value="blue" />
-            <input type="radio" name="todoColor" value="orange" />
-            <input type="radio" name="todoColor" value="green" />
-            <input type="radio" name="todoColor" value="purple" />
-            <input type="radio" name="todoColor" value="aquamarine" />
-            <input type="radio" name="todoColor" value="tomato" />
-            <input type="radio" name="todoColor" value="chocolate" />
+            <input type="radio" name="todoColor" value="#ff0000" checked />
+            <input type="radio" name="todoColor" value="#0000ff" />
+            <input type="radio" name="todoColor" value="#ffa500" />
+            <input type="radio" name="todoColor" value="#008000" />
+            <input type="radio" name="todoColor" value="#800080" />
+            <input type="radio" name="todoColor" value="#7fffd4" />
+            <input type="radio" name="todoColor" value="#ff6347" />
+            <input type="radio" name="todoColor" value="#d2691e" />
           </div>
         </div>
         <div class="modalBtnContainer">
@@ -108,21 +117,27 @@
         </div>
       </div>
     </div>
-    <!-- <div id="tooltipContainer">
-      <header>
-        <button>수정</button>
-        <button>삭제</button>
-        <button>X</button>
-      </header>
-      <section>
-        <div>내용</div>
-        <div>날짜</div>
-      </section>
-    </div> -->
-    <script type="module" src="./js/createCalendarForm.js"></script>
-    <script type="module" src="./js/createAndUpdateCalendar.js"></script>
-    <script type="module" src="./js/moveCalendar.js"></script>
-    <script type="module" src="./js/showTodoBarOnCalendar.js"></script>
+    <div id="todoBarIntroContainerOverlay" class="isTodoBarIntro">
+      <div id="todoBarIntroContainer">
+        <header>
+          <input type="checkbox" id="todoBarIntroCheckBox" />
+          <button data-tooltip="수정" id="todoBarIntroEditBtn">
+            <img src="./public/image/edit.png" alt="수정" />
+          </button>
+          <button data-tooltip="삭제" id="todoBarIntroDeleteBtn">
+            <img src="./public/image/delete.png" alt="삭제" />
+          </button>
+          <button data-tooltip="닫기" id="todoBarIntroCloseBtn">
+            <img src="./public/image/close.png" alt="닫기" />
+          </button>
+        </header>
+        <section>
+          <div id="todoBarIntroContent"></div>
+          <div id="todoBarIntroDate"></div>
+        </section>
+      </div>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script type="module" src="./js/app.js"></script>
   </body>
 </html>

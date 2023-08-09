@@ -3,7 +3,7 @@ import createAndUpdateCalendar from "./createAndUpdateCalendar.js";
 import moveCalendar from "./moveCalendar.js";
 import showTodoBarOnCalendar from "./showTodoBarOnCalendar.js";
 import submitTodoHandler from "./submitTodoHandler.js";
-import { modalCloseAddHandler } from "./modalFunction.js";
+import { modalCloseAddHandler, modalOpen } from "./modalFunction.js";
 
 // 각 주의 첫째날짜(일요일)들을 모은 배열
 export var calendarWeekStartDateList = [];
@@ -23,11 +23,12 @@ export let changeCalendarWeekStartDateList = function changeCalendarWeekStartDat
 export var todoDataList = [
   {
     id: 1,
-    title: "제목1111111111111111113333333333332222222222222",
-    content: "내용",
+    title: "운동하기",
+    content: "달리기",
     startDate: "2023-08-12-12-15",
     endDate: "2023-08-14-00-00",
-    backgroundColor: "red",
+    backgroundColor: "#ff0000",
+    isExist: true,
   },
 ];
 
@@ -47,9 +48,61 @@ window.onload = function () {
   let endMinute = document.querySelector("select[name='endMinute']");
   let todoTitle = document.getElementById("todoTitle");
   let todoContent = document.getElementById("todoContent");
-  let modalHeaderContainer = document.getElementById("modalHeaderContainer");
-  let modalHeaderTitle = document.getElementById("modalHeaderTitle");
   let submitAddCalendarHandler = document.getElementById("submitAddCalendarHandler");
+
+  document.getElementById("todoBarIntroContainerOverlay").addEventListener("click", (e) => {
+    document.getElementById("todoBarIntroContainerOverlay").setAttribute("class", "isTodoBarIntro");
+  });
+
+  document.getElementById("todoBarIntroCloseBtn").addEventListener("click", (e) => {
+    document.getElementById("todoBarIntroContainerOverlay").setAttribute("class", "isTodoBarIntro");
+  });
+
+  document.getElementById("todoBarIntroEditBtn").addEventListener("click", (e) => {
+    modalOpen();
+  });
+
+  document.getElementById("todoBarIntroCheckBox").addEventListener("click", (e) => {
+    e.stopPropagation();
+    todoDataList.map((i) => {
+      if (i.id === todoId) {
+        i.isExist = !i.isExist;
+        if (i.isExist === false) {
+          i.backgroundColor = i.backgroundColor + "77";
+        } else {
+          i.backgroundColor = i.backgroundColor.substring(0, 7);
+        }
+        let temp = document.querySelectorAll("[data-id='" + i.id + "']");
+        for (let j = 0; j < temp.length; j++) {
+          temp[j].parentElement.childNodes[0].style.backgroundColor = i.backgroundColor;
+          if (i.isExist === false) {
+            temp[j].parentElement.childNodes[0].style.textDecoration = "line-through";
+          } else {
+            temp[j].parentElement.childNodes[0].style.textDecoration = "none";
+          }
+        }
+      }
+    });
+  });
+
+  document.getElementById("todoBarIntroDeleteBtn").addEventListener("click", (e) => {
+    if (window.confirm("삭제를 하시겠습니까?")) {
+      let removeIndex;
+      todoDataList.map((i, index) => {
+        if (i.id === todoId) {
+          removeIndex = index;
+        }
+      });
+      todoDataList.splice(removeIndex, 1);
+      Toastify({
+        text: "일정을 삭제했습니다.",
+        backgroundColor: "linear-gradient(to right, #ff0000ff, #fd6868)",
+        className: "warning",
+      }).showToast();
+      showTodoBarOnCalendar();
+    }
+  });
+
   //
   createCalendarForm();
   createAndUpdateCalendar(calendarYear, calendarMonth);

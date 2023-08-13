@@ -31,44 +31,7 @@ export let changeCalendarMonth = function changeCalendarMonth(value) {
   calendarMonth = value;
 };
 
-export var todoDataList = [
-  {
-    id: 1,
-    title: "운동하기",
-    content: "달리기",
-    startDate: "2023-08-12-12-15",
-    endDate: "2023-08-14-00-00",
-    backgroundColor: "#0000ff",
-    isExist: true,
-  },
-  {
-    id: 2,
-    title: "운동하기",
-    content: "달리기",
-    startDate: "2023-08-12-12-15",
-    endDate: "2023-09-16-00-00",
-    backgroundColor: "#ff6347",
-    isExist: false,
-  },
-  {
-    id: 3,
-    title: "운동하기",
-    content: "달리기",
-    startDate: "2023-08-16-12-15",
-    endDate: "2023-09-01-00-00",
-    backgroundColor: "#ffa500",
-    isExist: false,
-  },
-  {
-    id: 4,
-    title: "운동하기",
-    content: "달리기",
-    startDate: "2024-07-12-12-15",
-    endDate: "2024-08-16-00-00",
-    backgroundColor: "#ff6347",
-    isExist: false,
-  },
-];
+export var todoDataList = [];
 
 window.onload = function () {
   let startYear = document.querySelector("select[name='startYear']");

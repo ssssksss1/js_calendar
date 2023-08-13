@@ -10,9 +10,6 @@
     <link rel="stylesheet" href="./css/app.css" />
   </head>
   <body>
-    <!-- <nav>
-      <button type="button" onclick="location.href='index.html' ">홈</button>
-    </nav> -->
     <section id="calendarContainer">
       <header id="calendarHeader">
         <button id="prevMonthMoveBtn">◀️</button>
@@ -21,8 +18,13 @@
           <span id="month"> </span>
         </button>
         <button id="nextMonthMoveBtn">▶️</button>
+        <select name="calendarShape" id="calendarShape">
+          <option disabled>형태</option>
+          <option value="month">월</option>
+          <option value="todo">할일</option>
+        </select>
       </header>
-      <article>
+      <article id="calendarShapeMonth">
         <div id="dayOfTheWeekContainer">
           <div>일</div>
           <div>월</div>
@@ -33,6 +35,11 @@
           <div>토</div>
         </div>
         <div id="monthContainer"></div>
+      </article>
+      <article id="calendarShapeTodo">
+        <div id="todoContainer">
+          <ul id="todoListContainer"></ul>
+        </div>
       </article>
     </section>
     <div id="modal" class="modal">

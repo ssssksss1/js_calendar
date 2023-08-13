@@ -25,12 +25,18 @@ body section {
 body section article {
   width: 100%;
 }
+body section article:nth-of-type(n + 2) {
+  display: none;
+}
 
 #calendarHeader {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 60px;
+}
+#calendarHeader #calendarShape {
+  margin-left: 8px;
 }
 #calendarHeader #dateYearAndMonth {
   width: 120px;
@@ -47,6 +53,33 @@ body section article {
   width: 40px;
   height: 40px;
   background-color: #ffdca0;
+}
+
+#calendarShapeTodo {
+  max-height: 95vh;
+  overflow: scroll;
+}
+#calendarShapeTodo #todoContainer {
+  padding: 10px;
+}
+#calendarShapeTodo #todoContainer #todoListContainer {
+  display: flex;
+  flex-flow: nowrap column;
+  gap: 8px;
+}
+#calendarShapeTodo #todoContainer #todoListContainer .todoLegendMonth {
+  font-size: 3rem;
+}
+#calendarShapeTodo #todoContainer #todoListContainer .todoItem {
+  min-height: 60px;
+  width: calc(100% - 8px);
+  outline: solid 1px black;
+  padding: 4px;
+  border-radius: 10px;
+  font-size: 1.6rem;
+}
+#calendarShapeTodo #todoContainer #todoListContainer .todoItem:hover {
+  background: #f0f0f0;
 }
 
 #dayOfTheWeekContainer {
@@ -78,6 +111,16 @@ body section article {
   align-items: start;
   grid-template-columns: repeat(7, 1fr);
 }
+#monthContainer .weekContainer > button:nth-of-type(7n + 1) {
+  color: #ff0000;
+}
+#monthContainer .weekContainer > button:nth-of-type(7n + 7) {
+  color: #0000ff;
+}
+#monthContainer .weekContainer > button:not(:has(.todoBar:hover)):hover {
+  z-index: 10;
+  outline: 2px solid black;
+}
 #monthContainer .weekContainer > button {
   align-items: start;
   background-color: #ffffff;
@@ -100,9 +143,7 @@ body section article {
   top: 0px;
 }
 #monthContainer .weekContainer > button .dayContainer {
-  z-index: 10;
   display: grid;
-  gap: 2px;
   width: 100%;
   align-items: start;
 }
@@ -118,16 +159,6 @@ body section article {
   text-overflow: ellipsis;
 }
 #monthContainer .weekContainer > button .todoBar:hover {
-  outline: 3px solid black;
-}
-#monthContainer .weekContainer > button:nth-of-type(7n + 1) {
-  color: #ff0000;
-}
-#monthContainer .weekContainer > button:nth-of-type(7n + 7) {
-  color: #0000ff;
-}
-#monthContainer .weekContainer > button:not(:has(.todoBar:hover)):hover {
-  z-index: 3;
   outline: 3px solid black;
 }
 

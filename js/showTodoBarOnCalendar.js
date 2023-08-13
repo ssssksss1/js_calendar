@@ -21,10 +21,6 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
     // 막대바 1층을 다 그리고 나서 다시 그 다음층부터 그려야 한다. 그래서 기준점 날짜를 변경한다. ( 1950년 전에 일정은 없을테니까 초기화 기준)
     standardEndDate = "1950-01-01";
     let removeIndex = [];
-    // console.log("barLayer :" + barLayer);
-    // todoDataListCopy.map((i) => {
-    //   console.log(i);
-    // });
     // 4. 일정을 반복하면서 todoBar 1층부터 그려주는 것을 확인하고 점차 2층,3층으로 올라감
     todoDataListCopy.map((i, index) => {
       // 5. 보이지는 달력과 상관없는 일정은 제외한다.
@@ -35,14 +31,6 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
             new Date(calendarWeekStartDateList[calendarWeekStartDateList.length - 1].getTime() + 6 * 24 * 3600 * 1000)
           )
       ) {
-        // console.log(
-        //   "barLayer : " + barLayer,
-        //   "\ni.startDate : " + i.startDate,
-        //   "\ni.endDate : " + i.endDate,
-        //   "\ni.title : " + i.title,
-        //   "\npass : " + (standardEndDate < i.startDate.substring(0, 10))
-        // );
-
         if (standardEndDate < i.startDate.substring(0, 10)) {
           let lastDayOfMonth = dateTypeToString4Y2M2D(
             new Date(calendarWeekStartDateList[calendarWeekStartDateList.length - 1].getTime() + 6 * 24 * 3600 * 1000)
@@ -55,36 +43,17 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
             i.endDate.substring(0, 10) > lastDayOfMonth ? lastDayOfMonth : i.endDate.substring(0, 10)
           );
           let todoInterval = dayIntervalCalc(todoEndDate, todoStartDate) + 1;
-          // console.log(
-          //   "lastDayOfMonth : " +
-          //     lastDayOfMonth +
-          //     "\ntodoStartDate : " +
-          //     todoStartDate +
-          //     "\ntodoEndDate : " +
-          //     todoEndDate +
-          //     "\ntodoInterval : " +
-          //     todoInterval
-          // );
           // 달력에서 각 주의 첫번째 날짜와 일정 시작날짜를 비교해서 시작 일정 위치를 찾음
           for (; weekLayer < calendarWeekStartDateList.length; weekLayer++) {
             // 열과 행 언제 부터 시작할지 알려주는 함수(결과 값으로는 열의 위치를 알려주고, weekLayer 변수에 행의 위치가 보관된다.)
             let todoStartDateIndex = dayIntervalCalc(todoStartDate, calendarWeekStartDateList[weekLayer]) - 1;
             // 몇번째 주부터 시작할지 찾는 로직
             if (todoStartDateIndex >= 0 && todoStartDateIndex < 7) {
-              // console.log(
-              //   "일정 개수 : " + todoInterval + ",\n시작칸 : " + todoStartDateIndex + ",\n시작줄 :" + weekLayer
-              // );
               // 현재 줄에 들어가야할 블록의 갯수
               let numberOfExtraBlocks = todoInterval;
               let blocksNumberOfCurrentLine =
                 todoStartDateIndex + todoInterval > 7 ? 7 - todoStartDateIndex : todoInterval;
               while (blocksNumberOfCurrentLine > 0) {
-                // console.log(
-                //   "numberOfExtraBlocks : " +
-                //     numberOfExtraBlocks +
-                //     ",\nblocksNumberOfCurrentLine : " +
-                //     blocksNumberOfCurrentLine
-                // );
                 let weekStartDateToString = dateTypeToString4Y2M2D(
                   new Date(calendarWeekStartDateList[weekLayer].getTime() + todoStartDateIndex * 24 * 3600 * 1000)
                 );
@@ -111,6 +80,11 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                 todoBarElement.innerText = i.title;
                 todoBarElement.addEventListener("click", (e) => {
                   e.stopPropagation();
+                  if (i.isExist === false) {
+                    document.getElementById("todoBarIntroCheckBox").checked = true;
+                  } else {
+                    document.getElementById("todoBarIntroCheckBox").checked = false;
+                  }
                   document.getElementById("todoBarIntroContainerOverlay").classList.toggle("isTodoBarIntro");
                   let w = document.getElementById("calendarContainer").clientWidth;
                   if (w < e.clientX + 300) {

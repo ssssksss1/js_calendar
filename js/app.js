@@ -4,12 +4,17 @@ import moveCalendar from "./moveCalendar.js";
 import showTodoBarOnCalendar from "./showTodoBarOnCalendar.js";
 import submitTodoHandler from "./submitTodoHandler.js";
 import { modalCloseAddHandler, modalOpen } from "./modalFunction.js";
+import changeCalendarShape from "./changeCalendarShape.js";
+import showTodoList from "./todo/showTodoList.js";
 
 // 각 주의 첫째날짜(일요일)들을 모은 배열
 export var calendarWeekStartDateList = [];
 // 각 주마다 어떤 할일들이 공간을 차지하고 있는지를 담은 배열(가로막대로 길게 표시하기 위한 용도)
 // let calendarWeekTodoList = []; // 이거 필요 없는거 같은데?
 export var todoId = null;
+export let calendarYear = new Date().getFullYear();
+export let calendarMonth = new Date().getMonth();
+
 export let changeTodoId = function changeTodoId(value) {
   todoId = value;
 };
@@ -19,6 +24,12 @@ export let changeTodoDataList = function changeTodoDataList(value) {
 export let changeCalendarWeekStartDateList = function changeCalendarWeekStartDateList(value) {
   calendarWeekStartDateList = value;
 };
+export let changeCalendarYear = function changeCalendarYear(value) {
+  calendarYear = value;
+};
+export let changeCalendarMonth = function changeCalendarMonth(value) {
+  calendarMonth = value;
+};
 
 export var todoDataList = [
   {
@@ -27,15 +38,39 @@ export var todoDataList = [
     content: "달리기",
     startDate: "2023-08-12-12-15",
     endDate: "2023-08-14-00-00",
-    backgroundColor: "#ff0000",
+    backgroundColor: "#0000ff",
     isExist: true,
+  },
+  {
+    id: 2,
+    title: "운동하기",
+    content: "달리기",
+    startDate: "2023-08-12-12-15",
+    endDate: "2023-09-16-00-00",
+    backgroundColor: "#ff6347",
+    isExist: false,
+  },
+  {
+    id: 3,
+    title: "운동하기",
+    content: "달리기",
+    startDate: "2023-08-16-12-15",
+    endDate: "2023-09-01-00-00",
+    backgroundColor: "#ffa500",
+    isExist: false,
+  },
+  {
+    id: 4,
+    title: "운동하기",
+    content: "달리기",
+    startDate: "2024-07-12-12-15",
+    endDate: "2024-08-16-00-00",
+    backgroundColor: "#ff6347",
+    isExist: false,
   },
 ];
 
 window.onload = function () {
-  let calendarYear = new Date().getFullYear();
-  let calendarMonth = new Date().getMonth();
-
   let startYear = document.querySelector("select[name='startYear']");
   let startMonth = document.querySelector("select[name='startMonth']");
   let startDay = document.querySelector("select[name='startDay']");
@@ -64,7 +99,7 @@ window.onload = function () {
 
   document.getElementById("todoBarIntroCheckBox").addEventListener("click", (e) => {
     e.stopPropagation();
-    todoDataList.map((i) => {
+    todoDataList.map((i, index) => {
       if (i.id === todoId) {
         i.isExist = !i.isExist;
         if (i.isExist === false) {
@@ -74,11 +109,21 @@ window.onload = function () {
         }
         let temp = document.querySelectorAll("[data-id='" + i.id + "']");
         for (let j = 0; j < temp.length; j++) {
-          temp[j].parentElement.childNodes[0].style.backgroundColor = i.backgroundColor;
+          let _index = 0;
+          for (let k = 0; k < temp[j].parentNode.childNodes.length; k++) {
+            if (temp[j].parentNode.childNodes[k] === temp[j]) _index = k;
+          }
+          let select = document.getElementById("calendarShape");
+          if (select.value === "month") {
+            temp[j].parentElement.childNodes[_index].style.backgroundColor = i.backgroundColor;
+          } else if (select.value === "todo") {
+            // temp[j].parentElement.childNodes[_index].style.backgroundColor = "none";
+            // temp[j].parentElement.childNodes[_index].style.border = "solid " + value + " 4px";
+          }
           if (i.isExist === false) {
-            temp[j].parentElement.childNodes[0].style.textDecoration = "line-through";
+            temp[j].parentElement.childNodes[_index].style.textDecoration = "line-through";
           } else {
-            temp[j].parentElement.childNodes[0].style.textDecoration = "none";
+            temp[j].parentElement.childNodes[_index].style.textDecoration = "none";
           }
         }
       }
@@ -100,14 +145,16 @@ window.onload = function () {
         className: "warning",
       }).showToast();
       showTodoBarOnCalendar();
+      showTodoList();
     }
   });
 
   //
   createCalendarForm();
   createAndUpdateCalendar(calendarYear, calendarMonth);
-  moveCalendar(calendarYear, calendarMonth);
+  moveCalendar();
   modalCloseAddHandler();
   showTodoBarOnCalendar();
   submitTodoHandler();
+  changeCalendarShape();
 };

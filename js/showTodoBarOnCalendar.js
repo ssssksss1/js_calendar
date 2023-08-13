@@ -73,9 +73,9 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                 todoBarElement.style.paddingLeft = "4px";
                 todoBarElement.style.marginLeft = "1px";
                 if (i.isExist === false) {
-                  todoBarElement.style.backgroundColor = i.backgroundColor + "44";
+                  todoBarElement.style.backgroundColor = i.backgroundColor.substring(0, 7) + "44";
                 } else {
-                  todoBarElement.style.backgroundColor = i.backgroundColor;
+                  todoBarElement.style.backgroundColor = i.backgroundColor.substring(0, 7);
                 }
                 todoBarElement.innerText = i.title;
                 todoBarElement.addEventListener("click", (e) => {

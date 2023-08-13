@@ -9,7 +9,7 @@ import showTodoList from "./todo/showTodoList.js";
 
 // 각 주의 첫째날짜(일요일)들을 모은 배열
 export var calendarWeekStartDateList = [];
-// 각 주마다 어떤 할일들이 공간을 차지하고 있는지를 담은 배열(가로막대로 길게 표시하기 위한 용도)
+// 각 주마다 어떤 일정들이 공간을 차지하고 있는지를 담은 배열(가로막대로 길게 표시하기 위한 용도)
 // let calendarWeekTodoList = []; // 이거 필요 없는거 같은데?
 export var todoId = null;
 export let calendarYear = new Date().getFullYear();
@@ -31,7 +31,17 @@ export let changeCalendarMonth = function changeCalendarMonth(value) {
   calendarMonth = value;
 };
 
-export var todoDataList = [];
+export var todoDataList = [
+  {
+    id: 1,
+    title: "운동하기",
+    content: "달리기",
+    startDate: "2023-08-12-12-15",
+    endDate: "2023-09-16-00-00",
+    backgroundColor: "#ff6347",
+    isExist: false,
+  },
+];
 
 window.onload = function () {
   let startYear = document.querySelector("select[name='startYear']");
@@ -66,7 +76,7 @@ window.onload = function () {
       if (i.id === todoId) {
         i.isExist = !i.isExist;
         if (i.isExist === false) {
-          i.backgroundColor = i.backgroundColor + "44";
+          i.backgroundColor = i.backgroundColor.substring(0, 7) + "44";
         } else {
           i.backgroundColor = i.backgroundColor.substring(0, 7);
         }
@@ -108,7 +118,7 @@ window.onload = function () {
         className: "warning",
       }).showToast();
       showTodoBarOnCalendar();
-      showTodoList();
+      // showTodoList();
     }
   });
 

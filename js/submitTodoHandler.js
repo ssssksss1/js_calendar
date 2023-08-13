@@ -54,7 +54,7 @@ let submitTodoHandler = function submitTodoHandler() {
     if (todoStartDate > todoEndDate) {
       document.getElementById("inputItemTitleErrorMsg").innerText = "";
       document.getElementById("inputItemContentErrorMsg").innerText = "";
-      document.getElementById("inputItemDateErrorMsg").innerText = "시작날짜가 마지막날짜보다 더 늦습니다";
+      document.getElementById("inputItemDateErrorMsg").innerText = "시작날짜가 끝나는날짜보다 더 늦습니다";
       return;
     }
     document.getElementById("inputItemTitleErrorMsg").innerText = "";

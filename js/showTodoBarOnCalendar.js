@@ -73,7 +73,7 @@ let showTodoBarOnCalendar = function showTodoBarOnCalendar() {
                 todoBarElement.style.paddingLeft = "4px";
                 todoBarElement.style.marginLeft = "1px";
                 if (i.isExist === false) {
-                  todoBarElement.style.backgroundColor = i.backgroundColor + "77";
+                  todoBarElement.style.backgroundColor = i.backgroundColor + "44";
                 } else {
                   todoBarElement.style.backgroundColor = i.backgroundColor;
                 }

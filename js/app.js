@@ -103,7 +103,7 @@ window.onload = function () {
       if (i.id === todoId) {
         i.isExist = !i.isExist;
         if (i.isExist === false) {
-          i.backgroundColor = i.backgroundColor + "77";
+          i.backgroundColor = i.backgroundColor + "44";
         } else {
           i.backgroundColor = i.backgroundColor.substring(0, 7);
         }

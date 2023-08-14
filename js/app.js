@@ -118,7 +118,7 @@ window.onload = function () {
         className: "warning",
       }).showToast();
       showTodoBarOnCalendar();
-      // showTodoList();
+      showTodoList();
     }
   });
 

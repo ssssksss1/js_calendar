@@ -1,6 +1,7 @@
 import showTodoBarOnCalendar from "./showTodoBarOnCalendar.js";
 import { todoDataList, todoId } from "./app.js";
 import { modalToggle } from "./modalFunction.js";
+import todoMain from "./todo/main.js";
 
 /**
  * - 일정을 submit할 때 실행하는 함수
@@ -111,6 +112,7 @@ let submitTodoHandler = function submitTodoHandler() {
     });
     showTodoBarOnCalendar();
     modalToggle();
+    todoMain();
   });
 };
 
